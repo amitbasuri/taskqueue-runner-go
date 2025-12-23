@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Queue Dashboard</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Task Queue Dashboard</h1>
+            <p class="subtitle">Real-time task monitoring</p>
+            <div class="connection-wrapper">
+                <span id="connection-status" class="status disconnected">Disconnected</span>
+            </div>
+        </header>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Tasks</div>
+                <div class="stat-value" id="total-tasks">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Queued</div>
+                <div class="stat-value queued" id="queued-tasks">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Running</div>
+                <div class="stat-value running" id="running-tasks">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Succeeded</div>
+                <div class="stat-value succeeded" id="succeeded-tasks">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Failed</div>
+                <div class="stat-value failed" id="failed-tasks">0</div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <div class="chart-title">Success Rate</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="success-rate" style="width: 0%"></div>
+            </div>
+            <div class="success-percentage-display">
+                <span id="success-percentage">0</span>%
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <div class="chart-title">Additional Metrics</div>
+            <div class="info-row">
+                <span class="info-label">Average Retry Count</span>
+                <span class="info-value" id="avg-retry">0.00</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Tasks with Retries</span>
+                <span class="info-value" id="tasks-with-retries">0</span>
+            </div>
+        </div>
+        
+        <div class="last-updated">
+            Last updated: <span id="last-updated">Never</span>
+        </div>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+auth:
+  username: taskqueue
+  password: taskqueue
+  database: taskqueue
+
+primary:
+  persistence:
+    size: 1Gi
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 100m

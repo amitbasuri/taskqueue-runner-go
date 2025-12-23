@@ -1,0 +1,14 @@
+{
+  "name": "task-queue-integration-tests",
+  "version": "1.0.0",
+  "description": "Integration tests for Task Queue API",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "test:watch": "node --test --watch"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

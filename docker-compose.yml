@@ -1,0 +1,62 @@
+services:
+  db:
+    image: postgres:16.1
+    restart: always
+    environment:
+      - POSTGRES_USER=taskqueue
+      - POSTGRES_DB=taskqueue
+      - POSTGRES_PASSWORD=taskqueue
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taskqueue"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=taskqueue
+      - DB_PASSWORD=taskqueue
+      - DB_DATABASE=taskqueue
+      - DB_SSL_MODE=disable
+      - SERVER_PORT=8080
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=taskqueue
+      - DB_PASSWORD=taskqueue
+      - DB_DATABASE=taskqueue
+      - DB_SSL_MODE=disable
+      - WORKER_POLL_INTERVAL=1
+    depends_on:
+      db:
+        condition: service_healthy
+
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=db
+      - ADMINER_DESIGN=nette
+    depends_on:
+      db:
+        condition: service_healthy

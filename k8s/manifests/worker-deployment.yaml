@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-queue-worker
+  namespace: task-queue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: task-queue-worker
+  template:
+    metadata:
+      labels:
+        app: task-queue-worker
+    spec:
+      containers:
+      - name: worker
+        image: task-queue-worker:latest
+        imagePullPolicy: Never
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: task-queue-config
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: task-queue-config
+              key: DB_PORT
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: task-queue-config
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: task-queue-secret
+              key: DB_PASSWORD
+        - name: DB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: task-queue-config
+              key: DB_DATABASE
+        - name: DB_SSL_MODE
+          valueFrom:
+            configMapKeyRef:
+              name: task-queue-config
+              key: DB_SSL_MODE
+        - name: WORKER_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
