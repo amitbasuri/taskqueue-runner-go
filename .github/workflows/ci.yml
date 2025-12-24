@@ -66,6 +66,7 @@ jobs:
           files: ./coverage.out
           flags: unittests
           name: codecov-umbrella
+          use_oidc: true
           fail_ci_if_error: false
           # For private repositories, add CODECOV_TOKEN in repo secrets and uncomment below:
           # token: ${{ secrets.CODECOV_TOKEN }}
