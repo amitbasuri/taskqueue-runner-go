@@ -60,12 +60,15 @@ jobs:
         run: go test -v -race -coverprofile=coverage.out ./...
 
       - name: Upload coverage to Codecov
+        if: ${{ github.event.repository.private == false }}
         uses: codecov/codecov-action@v5
         with:
           files: ./coverage.out
           flags: unittests
           name: codecov-umbrella
-          fail_ci_if_error: true
+          fail_ci_if_error: false
+          # For private repositories, add CODECOV_TOKEN in repo secrets and uncomment below:
+          # token: ${{ secrets.CODECOV_TOKEN }}
 
   lint:
     name: Lint
