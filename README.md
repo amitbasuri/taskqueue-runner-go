@@ -3,6 +3,7 @@
 [![Go Version](https://img.shields.io/badge/Go-1.23-blue.svg)](https://golang.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![CI](https://github.com/amitbasuri/taskqueue-runner-go/actions/workflows/ci.yml/badge.svg)](https://github.com/amitbasuri/taskqueue-runner-go/actions)
+[![Codecov](https://codecov.io/gh/amitbasuri/taskqueue-runner-go/branch/main/graph/badge.svg)](https://codecov.io/gh/amitbasuri/taskqueue-runner-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/amitbasuri/taskqueue-runner-go)](https://goreportcard.com/report/github.com/amitbasuri/taskqueue-runner-go)
 
 > A production-ready distributed background task processing system built with Go, PostgreSQL, and Kubernetes.
