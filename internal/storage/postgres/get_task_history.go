@@ -3,7 +3,7 @@ package postgres
 import (
 	"context"
 
-	"github.com/amitbasuri/taskqueue-go/internal/models"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/models"
 )
 
 // GetTaskHistory retrieves the history of status changes for a task

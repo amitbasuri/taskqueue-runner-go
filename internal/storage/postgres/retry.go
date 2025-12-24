@@ -8,8 +8,8 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/amitbasuri/taskqueue-go/internal/models"
-	"github.com/amitbasuri/taskqueue-go/internal/storage"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/models"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/storage"
 )
 
 // ScheduleRetry marks a task for retry with exponential backoff

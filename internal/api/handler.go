@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/amitbasuri/taskqueue-go/internal/storage"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/storage"
 	"github.com/gin-gonic/gin"
 )
 

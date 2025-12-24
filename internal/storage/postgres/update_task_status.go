@@ -3,8 +3,8 @@ package postgres
 import (
 	"context"
 
-	"github.com/amitbasuri/taskqueue-go/internal/models"
-	"github.com/amitbasuri/taskqueue-go/internal/storage"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/models"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/storage"
 )
 
 // UpdateTaskStatus updates the status of a task

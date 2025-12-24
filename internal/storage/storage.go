@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/amitbasuri/taskqueue-go/internal/models"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/models"
 )
 
 // Common errors

@@ -12,7 +12,7 @@ WARN_COLOR=\033[33;01m
 # Ensure Go bin is in PATH for kind
 export PATH := $(shell go env GOPATH)/bin:$(PATH)
 
-.PHONY: setup deps test build build-server build-worker clean all help
+.PHONY: setup deps test build build-server build-worker clean all help lint fmt
 all: deps test build
 
 # Show help
@@ -30,6 +30,8 @@ help:
 	@echo "  make build                - Build server and worker binaries"
 	@echo "  make build-server         - Build API server only"
 	@echo "  make build-worker         - Build worker only"
+	@echo "  make lint                 - Run golangci-lint linters"
+	@echo "  make fmt                  - Format code with go fmt"
 	@echo ""
 	@echo "$(OK_COLOR)🐳 Docker Compose:$(NO_COLOR)"
 	@echo "  make docker-build         - Build Docker images"
@@ -56,7 +58,7 @@ help:
 	@echo "  make setup                - Initial development setup"
 	@echo "  make deps                 - Download Go dependencies"
 	@echo ""
-	@echo "For more details: https://github.com/amitbasuri/taskqueue-go"
+	@echo "For more details: https://github.com/amitbasuri/taskqueue-runner-go"
 	@echo ""
 
 # Setup development environment
@@ -68,6 +70,8 @@ setup:
 	@command -v helm >/dev/null 2>&1 || brew install helm
 	@echo "$(OK_COLOR)==> Installing golang-migrate$(NO_COLOR)"
 	@command -v migrate >/dev/null 2>&1 || brew install golang-migrate
+	@echo "$(OK_COLOR)==> Installing golangci-lint$(NO_COLOR)"
+	@command -v golangci-lint >/dev/null 2>&1 || brew install golangci-lint
 	@echo "$(OK_COLOR)==> Installing Go dependencies$(NO_COLOR)"
 	@go mod download
 	@echo "$(OK_COLOR)✅ Setup complete!$(NO_COLOR)"
@@ -77,6 +81,7 @@ setup:
 	@echo "  ✓ kubectl: $$(kubectl version --client --short 2>/dev/null || echo 'not found')"
 	@echo "  ✓ helm: $$(helm version --short 2>/dev/null || echo 'not found')"
 	@echo "  ✓ migrate: $$(migrate -version 2>/dev/null || echo 'not found')"
+	@echo "  ✓ golangci-lint: $$(golangci-lint version 2>/dev/null || echo 'not found')"
 
 deps:
 	go mod download
@@ -86,15 +91,32 @@ build: build-server build-worker
 
 build-server:
 	@echo "$(OK_COLOR)==> Building the API server (producer)...$(NO_COLOR)"
-	@CGO_ENABLED=0 go build -v -ldflags="-s -w" -o "$(BUILD_DIR)/$(NAME)" "$(SERVER_SRC)"
+	@CGO_ENABLED=0 go build -trimpath -v -ldflags="-s -w" -o "$(BUILD_DIR)/$(NAME)" "$(SERVER_SRC)"
 
 build-worker:
 	@echo "$(OK_COLOR)==> Building the worker (consumer)...$(NO_COLOR)"
-	@CGO_ENABLED=0 go build -v -ldflags="-s -w" -o "$(BUILD_DIR)/$(WORKER_NAME)" "$(WORKER_SRC)"
+	@CGO_ENABLED=0 go build -trimpath -v -ldflags="-s -w" -o "$(BUILD_DIR)/$(WORKER_NAME)" "$(WORKER_SRC)"
 
 clean:
 	@echo "$(WARN_COLOR)==> Cleaning build artifacts$(NO_COLOR)"
 	@rm -rf $(BUILD_DIR)
+
+# Code format
+fmt:
+	@echo "$(OK_COLOR)==> Formatting code with go fmt$(NO_COLOR)"
+	@go fmt ./...
+
+# Code linting
+lint:
+	@echo "$(OK_COLOR)==> Running golangci-lint$(NO_COLOR)"
+	@command -v golangci-lint >/dev/null 2>&1 || { \
+		echo "$(WARN_COLOR)==> golangci-lint not found, installing via Homebrew...$(NO_COLOR)"; \
+		brew install golangci-lint || { \
+			echo "$(ERROR_COLOR)==> Failed to install golangci-lint$(NO_COLOR)"; \
+			exit 1; \
+		}; \
+	}
+	@golangci-lint run ./...
 
 # Docker commands
 docker-build:

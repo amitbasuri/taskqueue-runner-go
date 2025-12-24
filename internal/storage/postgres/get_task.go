@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/amitbasuri/taskqueue-go/internal/models"
-	"github.com/amitbasuri/taskqueue-go/internal/storage"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/models"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/storage"
 	"github.com/jackc/pgx/v5"
 )
 

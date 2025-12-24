@@ -5,7 +5,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/amitbasuri/taskqueue-go/internal/models"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/models"
 	"github.com/jackc/pgx/v5"
 )
 

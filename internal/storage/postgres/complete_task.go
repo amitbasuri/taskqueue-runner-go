@@ -4,8 +4,8 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/amitbasuri/taskqueue-go/internal/models"
-	"github.com/amitbasuri/taskqueue-go/internal/storage"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/models"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/storage"
 )
 
 // CompleteTask marks a task as successfully completed

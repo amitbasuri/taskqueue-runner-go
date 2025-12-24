@@ -8,7 +8,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/amitbasuri/taskqueue-go/internal/models"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/models"
 )
 
 // SendEmailHandler handles email sending tasks

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/amitbasuri/taskqueue-go/internal/models"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/models"
 )
 
 // CreateTask creates a new task in the database

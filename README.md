@@ -2,8 +2,8 @@
 
 [![Go Version](https://img.shields.io/badge/Go-1.23-blue.svg)](https://golang.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![CI](https://github.com/amitbasuri/taskqueue-go/actions/workflows/ci.yml/badge.svg)](https://github.com/amitbasuri/taskqueue-go/actions)
-[![Go Report Card](https://goreportcard.com/badge/github.com/amitbasuri/taskqueue-go)](https://goreportcard.com/report/github.com/amitbasuri/taskqueue-go)
+[![CI](https://github.com/amitbasuri/taskqueue-runner-go/actions/workflows/ci.yml/badge.svg)](https://github.com/amitbasuri/taskqueue-runner-go/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/amitbasuri/taskqueue-runner-go)](https://goreportcard.com/report/github.com/amitbasuri/taskqueue-runner-go)
 
 > A production-ready distributed background task processing system built with Go, PostgreSQL, and Kubernetes.
 
@@ -485,7 +485,14 @@ Configuration files are organized in `k8s/`:
 └── Makefile
 ```
 
+Please review these documents before contributing:
+- [CONTRIBUTING.md](CONTRIBUTING.md) — guidelines, development setup, and workflow
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) — community standards and enforcement
+- [SECURITY.md](SECURITY.md) — how to report vulnerabilities
+
 ### Makefile Commands
+make fmt                        # Format Go code
+make lint                       # Run linters (golangci-lint)
 
 ```bash
 # Quick Start

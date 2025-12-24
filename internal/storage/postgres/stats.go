@@ -3,7 +3,7 @@ package postgres
 import (
 	"context"
 
-	"github.com/amitbasuri/taskqueue-go/internal/models"
+	"github.com/amitbasuri/taskqueue-runner-go/internal/models"
 )
 
 // GetStats retrieves system statistics for dashboard
