@@ -49,7 +49,10 @@ func (h *Handler) StreamTasks(c *gin.Context) {
 			}
 
 			// SSE format: "event: stats\ndata: <json>\n\n"
-			fmt.Fprintf(c.Writer, "event: stats\ndata: %s\n\n", string(data))
+			if _, err := fmt.Fprintf(c.Writer, "event: stats\ndata: %s\n\n", string(data)); err != nil {
+				slog.Error("Failed to write SSE data", "error", err)
+				continue
+			}
 			flusher.Flush()
 		}
 	}

@@ -69,6 +69,8 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
-	w.Start(ctx)
+	if err := w.Start(ctx); err != nil && err != context.Canceled {
+		slog.Error("Worker stopped with error", "error", err)
+	}
 	slog.Info("Worker stopped gracefully")
 }
