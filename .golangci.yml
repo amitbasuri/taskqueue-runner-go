@@ -1,21 +1,17 @@
-version: 2
+version: "2"
 run:
   timeout: 5m
   tests: true
   allow-parallel-runners: true
 
 linters:
-  disable-all: true
   enable:
     - govet
     - staticcheck
     - ineffassign
     - unused
     - misspell
-  disable:
-    - errcheck
 
 issues:
-  exclude-use-default: false
   max-issues-per-linter: 0
   max-same-issues: 0
