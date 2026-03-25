@@ -1,11 +1,11 @@
 module github.com/amitbasuri/taskqueue-runner-go
 
-go 1.24.0
+go 1.25.0
 
 require (
 	github.com/gin-gonic/gin v1.11.0
 	github.com/golang-migrate/migrate/v4 v4.19.1
-	github.com/jackc/pgx/v5 v5.7.6
+	github.com/jackc/pgx/v5 v5.9.1
 	github.com/joho/godotenv v1.5.1
 	github.com/kelseyhightower/envconfig v1.4.0
 )
